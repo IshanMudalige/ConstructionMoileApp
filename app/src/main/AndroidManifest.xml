@@ -9,19 +9,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ViewOrderActivity" android:parentActivityName=".HomeActivity" android:label="Order History"/>
-        <activity android:name=".HomeActivity" >
+
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SaveOrderActivity" android:parentActivityName=".ChooseSupActivity" android:label="Save Order" />
-        <activity android:name=".ChooseSupActivity" android:parentActivityName=".AddOrderActivity" android:label="Choose Supplier"/>
-        <activity android:name=".AddOrderActivity" android:parentActivityName=".HomeActivity" android:label="Add Order">
 
-        </activity>
+        <activity
+            android:name=".SaveOrderActivity"
+            android:label="Save Order"
+            android:parentActivityName=".ChooseSupActivity" />
+        <activity
+            android:name=".ChooseSupActivity"
+            android:label="Choose Supplier"
+            android:parentActivityName=".AddOrderActivity" />
+        <activity
+            android:name=".AddOrderActivity"
+            android:label="Add Order"
+            android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".ViewWarehouseActivity"
+            android:label="Warehouse Details"
+            android:parentActivityName=".HomeActivity"/>
+        <activity
+            android:name=".ViewOrderActivity"
+            android:label="Order History"
+            android:parentActivityName=".HomeActivity" />
+
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

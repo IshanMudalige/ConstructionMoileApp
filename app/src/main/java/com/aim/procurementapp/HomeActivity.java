@@ -32,5 +32,12 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this,ViewOrderActivity.class));
             }
         });
+
+        btnDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,ViewWarehouseActivity.class));
+            }
+        });
     }
 }

@@ -6,6 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
+
 import com.aim.procurementapp.R;
 import com.aim.procurementapp.model.PurchaseReq;
 import java.util.List;
@@ -30,7 +33,7 @@ public class OrderAdapter extends ArrayAdapter {
         PurchaseReq pr = (PurchaseReq) getItem(position);
 
         LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.layout_order,null,true);
+        View rowView = inflater.inflate(R.layout.layout_order, null, true);
 
         TextView tvDate = rowView.findViewById(R.id.tvDate);
         TextView tvMat = rowView.findViewById(R.id.tvMat);
@@ -43,10 +46,18 @@ public class OrderAdapter extends ArrayAdapter {
         tvDate.setText(pr.getOrderDate());
         tvMat.setText(pr.getMaterial());
         tvSup.setText(pr.getSupplier());
-        tvQty.setText("Qty- "+String.valueOf(pr.getQuantity()));
-        tvTotal.setText("Rs. "+String.valueOf(pr.getTotal()));
+        tvQty.setText("Qty- " + String.valueOf(pr.getQuantity()));
+        tvTotal.setText("Rs. " + String.valueOf(pr.getTotal()));
         tvStatus.setText(pr.getStatus());
         tvAdrs.setText(pr.getAddress());
+
+        if (pr.getStatus().equals("Pending")) {
+            tvStatus.setTextColor(ContextCompat.getColor(context, R.color.orange));
+        } else if (pr.getStatus().equals("Approved")){
+            tvStatus.setTextColor(ContextCompat.getColor(context, R.color.green));
+        }else if(pr.getStatus().equals("Rejected")) {
+            tvStatus.setTextColor(ContextCompat.getColor(context, R.color.red));
+        }
 
         return rowView;
     }
