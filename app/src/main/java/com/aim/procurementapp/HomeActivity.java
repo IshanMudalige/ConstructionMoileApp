@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
+/*
+    Home activity display add order, view orders and warehouse details
+ */
 public class HomeActivity extends AppCompatActivity {
 
     Button btnView,btnCreate,btnDetail;
@@ -19,6 +21,7 @@ public class HomeActivity extends AppCompatActivity {
         btnView = findViewById(R.id.btnView);
         btnDetail = findViewById(R.id.btnDetail);
 
+        //add order button handler
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -26,6 +29,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        //view orders button handler
         btnView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,6 +37,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        //view warehouse details button handler
         btnDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

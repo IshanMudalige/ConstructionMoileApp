@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.aim.procurementapp.R;
 import com.aim.procurementapp.model.Supplier;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierAdapter  extends ArrayAdapter {

@@ -1,13 +1,13 @@
 package com.aim.procurementapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.aim.procurementapp.adapter.OrderAdapter;
-import com.aim.procurementapp.adapter.SupplierAdapter;
 import com.aim.procurementapp.model.PurchaseReq;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,7 +16,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
+
+import java.util.Collections;
 import java.util.List;
 
 import okhttp3.Call;
@@ -24,7 +25,9 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
+/*
+    View previous orders activity
+ */
 public class ViewOrderActivity extends AppCompatActivity {
 
     ListView orderListView;
@@ -36,6 +39,13 @@ public class ViewOrderActivity extends AppCompatActivity {
 
         orderListView = findViewById(R.id.orderListView);
 
+        //display loading dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(R.layout.layout_loading);
+        final Dialog dialog = builder.create();
+        dialog.show();
+
+        //get data from the api
         OkHttpClient client = new OkHttpClient();
         String url = "https://procure-api.herokuapp.com/getAllRequisition";
 
@@ -60,8 +70,10 @@ public class ViewOrderActivity extends AppCompatActivity {
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<PurchaseReq>>() {}.getType();
                             List<PurchaseReq> prs = gson.fromJson(json, listType);
+                            Collections.reverse(prs);
                             adapter = new OrderAdapter(ViewOrderActivity.this,R.layout.layout_order,prs);
                             orderListView.setAdapter(adapter);
+                            dialog.dismiss();
                         }
                     });
 

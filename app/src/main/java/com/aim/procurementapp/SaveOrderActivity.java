@@ -11,7 +11,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.aim.procurementapp.model.Supplier;
 
@@ -33,7 +32,9 @@ import static com.aim.procurementapp.ChooseSupActivity.SUP;
 import static com.aim.procurementapp.ChooseSupActivity.MAT2;
 import static com.aim.procurementapp.ChooseSupActivity.DATE2;
 import static com.aim.procurementapp.ChooseSupActivity.ADRS2;
-
+/*
+    third step of the add order set quantity and save order
+ */
 public class SaveOrderActivity extends AppCompatActivity {
 
     EditText etQty,etPrice,etTotal;
@@ -52,6 +53,7 @@ public class SaveOrderActivity extends AppCompatActivity {
         etPrice.setEnabled(false);
         etTotal.setEnabled(false);
 
+        //get data from previous activities
         Intent intent = getIntent();
         final Supplier sup = (Supplier) intent.getSerializableExtra(SUP);
         final String req = intent.getStringExtra(REQ2);
@@ -61,6 +63,7 @@ public class SaveOrderActivity extends AppCompatActivity {
 
         etPrice.setText(String.valueOf(sup.getUnitPrice()));
 
+        //change total price according to the quantity
         etQty.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -81,11 +84,11 @@ public class SaveOrderActivity extends AppCompatActivity {
             }
         });
 
+        //save button handler
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                System.out.println("================="+req+date+mat+adrs);
                 OkHttpClient client = new OkHttpClient();
                 String url = "https://procure-api.herokuapp.com/saveRequisition";
 
@@ -116,6 +119,7 @@ public class SaveOrderActivity extends AppCompatActivity {
                             SaveOrderActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    //display success message
                                     AlertDialog.Builder adb = new AlertDialog.Builder(SaveOrderActivity.this);
                                     adb.setMessage("Order saved successfully");
                                     adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {

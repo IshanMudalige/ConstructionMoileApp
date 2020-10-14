@@ -1,42 +1,41 @@
 package com.aim.procurementapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
-import android.view.textclassifier.ConversationActions;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
-
 import com.aim.procurementapp.model.Material;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import org.jetbrains.annotations.NotNull;
-
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
-
+import java.util.Locale;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/*
+  adding order first step choose material,delivery date,supplier and name.
+ */
 public class AddOrderActivity extends AppCompatActivity {
 
     EditText etAdrs,etDate,etReq;
     Spinner spinner;
     Button btnNext;
+    final Calendar myCalendar = Calendar.getInstance();
     public static String REQ ="com.aim.procurementapp.REQ";
     public static String DATE ="com.aim.procurementapp.DATE";
     public static String MAT ="com.aim.procurementapp.MAT";
@@ -53,6 +52,7 @@ public class AddOrderActivity extends AppCompatActivity {
         spinner = findViewById(R.id.spinner);
         btnNext = findViewById(R.id.btnNext);
 
+        //get all the material categories from system using api
         OkHttpClient client = new OkHttpClient();
         String url = "https://procure-api.herokuapp.com/getAllMaterials";
 
@@ -92,6 +92,32 @@ public class AddOrderActivity extends AppCompatActivity {
         });
 
 
+        //date picker dialog handler
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+        //date field handler
+        etDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DatePickerDialog(AddOrderActivity.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+
+        //next button click method
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,10 +130,17 @@ public class AddOrderActivity extends AppCompatActivity {
                     intent.putExtra(REQ,req);
                     intent.putExtra(MAT,spinner.getSelectedItem().toString());
                     startActivity(intent);
-
             }
         });
 
+    }
+
+    //set date field value
+    private void updateLabel() {
+        String myFormat = "MM/dd/yy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        etDate.setText(sdf.format(myCalendar.getTime()));
     }
 
 

@@ -28,6 +28,10 @@ import static com.aim.procurementapp.AddOrderActivity.MAT;
 import static com.aim.procurementapp.AddOrderActivity.REQ;
 import static com.aim.procurementapp.AddOrderActivity.DATE;
 
+/*
+   *add order second step display suppliers and material availability
+   *user select one of the supplier
+ */
 public class ChooseSupActivity extends AppCompatActivity {
 
     ImageView imgAvb;
@@ -55,8 +59,7 @@ public class ChooseSupActivity extends AppCompatActivity {
         final String date = intent.getStringExtra(DATE);
         final String adrs = intent.getStringExtra(ADRS);
 
-        System.out.println("----"+req+date);
-
+        //get supplier from the api
         OkHttpClient client = new OkHttpClient();
         String url = "https://procure-api.herokuapp.com/getSuppliers";
 
@@ -86,10 +89,13 @@ public class ChooseSupActivity extends AppCompatActivity {
                             Gson gson = new Gson();
                             Type listType = new TypeToken<List<Supplier>>() {}.getType();
                             List<Supplier> suppliers = gson.fromJson(json, listType);
+
+                            //display message material not available
                             if (suppliers.isEmpty()){
                                 tvMat.setText("Material Not Available");
                                 imgAvb.setImageResource(R.drawable.ic_close_black_24dp);
-                            }else{
+
+                            } else{// display message material available
                                 tvMat.setText("Material Available");
                                 imgAvb.setImageResource(R.drawable.ic_check_black_24dp);
                                 adapter = new SupplierAdapter(ChooseSupActivity.this,R.layout.layout_supplier,suppliers);
@@ -103,6 +109,7 @@ public class ChooseSupActivity extends AppCompatActivity {
             }
         });
 
+        //get selected supplier from the list
         supListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

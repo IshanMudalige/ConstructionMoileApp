@@ -1,7 +1,9 @@
 package com.aim.procurementapp;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.widget.ListView;
 
@@ -21,7 +23,9 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
+/*
+    view warehouse details activity
+ */
 public class ViewWarehouseActivity extends AppCompatActivity {
 
     ListView listview;
@@ -33,6 +37,13 @@ public class ViewWarehouseActivity extends AppCompatActivity {
 
         listview = findViewById(R.id.wareListView);
 
+        //display loading dialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(R.layout.layout_loading);
+        final Dialog dialog = builder.create();
+        dialog.show();
+
+        //get data from the api
         OkHttpClient client = new OkHttpClient();
         String url = "https://procure-api.herokuapp.com/getAllInventory";
 
@@ -55,12 +66,11 @@ public class ViewWarehouseActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             Gson gson = new Gson();
-                            System.out.println("---------"+json);
                             Type listType = new TypeToken<List<Warehouse>>() {}.getType();
                             List<Warehouse> whs = gson.fromJson(json, listType);
-                            System.out.println("==============="+whs.get(0).getMaterial());
                             adapter = new WarehouseAdapter(ViewWarehouseActivity.this,R.layout.layout_warehouse,whs);
                             listview.setAdapter(adapter);
+                            dialog.dismiss();
                         }
                     });
 
