@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    android:backgroundTint="@color/card_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +19,8 @@
             android:layout_marginTop="8dp"
             android:paddingLeft="16dp"
             android:text="date"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/tvAdrs"
@@ -25,7 +28,8 @@
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
             android:text="adrs"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColor="@color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +43,8 @@
                 android:layout_weight="1"
                 android:paddingLeft="16dp"
                 android:text="mat"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/tvStatus"
@@ -49,7 +54,8 @@
                 android:gravity="end"
                 android:paddingEnd="16dp"
                 android:text="status"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                android:textColor="@color/white"/>
         </LinearLayout>
 
         <TextView
@@ -58,7 +64,8 @@
             android:layout_height="wrap_content"
             android:paddingLeft="16dp"
             android:text="sup"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            android:textColor="@color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,14 +79,16 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="16dp"
                 android:text="qty"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/tvPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="price"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textColor="@color/white"/>
         </LinearLayout>
 
     </LinearLayout>

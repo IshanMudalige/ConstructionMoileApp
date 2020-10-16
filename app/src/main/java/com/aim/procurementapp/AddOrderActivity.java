@@ -81,7 +81,7 @@ public class AddOrderActivity extends AppCompatActivity {
                             for(Material x:materials){
                                 list.add(x.getName());
                             }
-                            ArrayAdapter<String> adapter = new ArrayAdapter(AddOrderActivity.this,android.R.layout.simple_spinner_dropdown_item,list);
+                            ArrayAdapter<String> adapter = new ArrayAdapter(AddOrderActivity.this,R.layout.layout_spinner_item,list);
                             spinner.setAdapter(adapter);
 
                         }

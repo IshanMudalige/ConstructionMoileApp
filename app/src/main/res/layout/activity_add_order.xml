@@ -16,7 +16,9 @@
         app:cardCornerRadius="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/card_background"
+        app:cardElevation="0dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -30,7 +32,8 @@
                 android:layout_marginTop="32dp"
                 android:gravity="center"
                 android:text="Add Order"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:textColor="@color/white"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,7 +47,8 @@
                     android:layout_weight="1"
                     android:paddingLeft="4dp"
                     android:text="Delivery Address"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textColor="@color/white"/>
 
                 <EditText
                     android:id="@+id/etAdrs"
@@ -52,7 +56,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/white"/>
             </LinearLayout>
 
             <LinearLayout
@@ -67,7 +73,8 @@
                     android:layout_weight="1"
                     android:paddingLeft="4dp"
                     android:text="Delivery Date"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textColor="@color/white"/>
 
                 <EditText
                     android:id="@+id/etDate"
@@ -76,7 +83,9 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:focusable="false"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/white"/>
             </LinearLayout>
 
             <LinearLayout
@@ -91,7 +100,9 @@
                     android:layout_weight="1"
                     android:paddingLeft="4dp"
                     android:text="Requisitioner"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    />
 
                 <EditText
                     android:id="@+id/etReq"
@@ -99,7 +110,9 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/white"/>
             </LinearLayout>
 
             <LinearLayout
@@ -114,13 +127,19 @@
                     android:layout_weight="1"
                     android:paddingLeft="4dp"
                     android:text="Material"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textColor="@color/white"/>
 
                 <Spinner
                     android:id="@+id/spinner"
                     android:layout_width="215dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/white"
+                    style="@style/mySpinnerItemStyle"
+                    android:foregroundTint="@color/white"
+                    />
 
             </LinearLayout>
 
@@ -133,7 +152,7 @@
                 android:layout_marginRight="50dp"
                 android:text="NEXT"
                 android:background="@drawable/btn_background"
-                android:textColor="@color/white"/>
+                android:textColor="@color/card_background"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
